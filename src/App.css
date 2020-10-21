@@ -41,6 +41,7 @@ li{
   margin: 0 auto;
   height: 650px;
   background-size: cover;
+  width: 100%;
   background-image: url("https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg")
 }
 
@@ -77,10 +78,10 @@ li{
 .navbar__wrapper{
   background-image: linear-gradient(to right, rgba(5.88%, 27.45%, 27.06%, 0.6) 150px, rgba(10.59%, 36.47%, 36.08%, 0.84) 100%) !important;
   width: 100%;  
-  padding: 60px;
 }
 
 .navbar__brand{
+  padding: 60px;
   display: inline-block;
   margin-right: 1rem;
   font-size: 1.5rem;
@@ -100,6 +101,7 @@ li{
 
 .navbar__nav{
   display: flex;
+  padding: 60px;
 }
 
 .active{
@@ -190,4 +192,25 @@ li{
 
 .video-react-big-play-button{
   display: none;
+}
+
+@media screen and (max-width:500px){
+  .navbar__brand{
+    padding: 20px;
+  }
+  .navbar__nav {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .navbar__nav > li{
+    padding: 0;
+    font-size: 6px;
+  }
+
+  .ml-auto{
+    margin: 0 !important;
+  }
 }

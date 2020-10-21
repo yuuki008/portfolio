@@ -27,9 +27,6 @@ function App() {
     <div className="navbar">
       <div className="navbar__wrapper">
         <div className="navbar__brand">PORTFOLIO
-        <a  className="sns"target='_brank' href="https://www.instagram.com/n.doop.yuuki08/?hl=ja">
-          <InstagramIcon/>
-        </a>
         <a className="sns" target="_brank" href="https://twitter.com/ax0kQcEB93ntx6X">
           <TwitterIcon/>
         </a>
@@ -61,10 +58,11 @@ function App() {
           <br/>大学3年生まで野球一筋でしたが、コロナ期間で自分を見つめ直し、フロントエンドエンジニアになろうと思い学習中です。
           <br/>自分にとって引退は、大きな決断でしたが、それが今の勉強の１番のモチベーションになっています。
           <br/><br/>言語選択として中心に勉強しているのは、javascriptです。そしてライブラリのreactを使って制作物を作っています。
-          <br/>github常にいくつか制作物のコードを載せておりますのでみていただけると幸いです！
+          <br/>github上にていくつか制作物のコードを載せておりますのでみていただけると幸いです！
           <br/>Qiitaでも勉強のアウトプットとして記事もいくつかアップしておりますのでみていただけるとありがたいです！
           <br/><br/>最後に西南学院野球部の応援もしていただくと嬉しいです！以下が野球部のSNSのアカウントですので是非覗いてみてください！
-          <br/><br/><a target="_brank" className="seinan" href="https://www.youtube.com/channel/UCFMxIgcRu1mbjMg3LnvNHaw">
+          <br/><br/>
+          <a target="_brank" className="seinan" href="https://www.youtube.com/channel/UCFMxIgcRu1mbjMg3LnvNHaw">
             <YouTubeIcon className={classes.icon}/>
           </a>
           <a target="_brank" className="seinan" href="https://www.instagram.com/seinanbaseball/?hl=ja">
