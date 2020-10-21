@@ -1,0 +1,57 @@
+.form{
+    margin-top: 50px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+input{
+    background-color: #242127;
+    border: 1px solid lightgray;
+    padding: 20px;
+    height: 10px;
+    width: 43%;
+}
+  
+.description{
+    width: 100%;
+    display: flex;
+}
+
+textarea{
+    background-color: #242127;
+    border: 1px solid lightgray;
+    width: 100%;
+    padding: 20px;
+}
+
+.user__info{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.MuiTextField-root{
+    color: white !important;
+}
+
+#standard-basic-label{
+    color : white !important;
+}
+
+.MuiInput-underline{
+    border-color: white !important;
+}
+
+.textfield{
+    color: white;
+}
+
+.post{
+    width: 8%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.post:hover{
+    border-bottom: 2px solid white;
+}

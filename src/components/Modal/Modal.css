@@ -1,0 +1,33 @@
+.modal__section{
+    margin: 80px 0;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.modal__description{
+    width: 70%;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: left;
+}
+
+.modal__description > P {
+    line-height: 30px;
+    font-weight: 600;
+}
+
+.modal__description > h2{
+    border-bottom: 1px solid lightgray;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.modal__description > h3{
+    padding: 20px;
+}
+
+.modal__description > span{
+    font-weight: 600;
+    font-size: 16px;
+}
