@@ -7,7 +7,6 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import {makeStyles} from '@material-ui/styles'
 import Contact from './components/Contact/Contact';
 import Card from './components/Card/Card';
-import Play from './components/UIKit/Play'
 
 
 
@@ -16,6 +15,9 @@ const useStyles = makeStyles({
     height: "24px",
     width: "24px",
     top: '15px',
+    '&:hover':{
+      borderBottom: "2px solid white"
+    }
   }
 })
 

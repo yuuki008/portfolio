@@ -70,7 +70,7 @@ const Contact = () => {
                     + 'メールアドレス:' + email + '\n'
                     + '【お問い合わせ内容】\n' + description
             }
-            const adress = 'https://hooks.slack.com/services/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'
+            const adress = 'slack webhook'
 
             fetch(adress, {
                 method: 'POST',
