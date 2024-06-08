@@ -52,7 +52,7 @@ export const CommandOutput = memo((props: Props) => {
     case "":
       break;
     default:
-      return <NotFoundCommand commandName={commandName} />;
+      return <NotFoundCommand history={props.commandHistory} />;
   }
 });
 
