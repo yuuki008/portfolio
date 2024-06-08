@@ -1,10 +1,6 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import { useContext, useEffect } from "react";
 import { TerminalContext } from "@/context/TerminalContext";
 import { CommandLine } from "@/components/CommandLine";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { isCommandRunning } = useContext(TerminalContext);
