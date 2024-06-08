@@ -5,7 +5,7 @@ import { DirectoryResource } from "@/pages/_app";
 type TerminalContextType = {
   commandHistories: CommandHistory[];
   isCommandRunning: boolean;
-  finishedFirstview: boolean;
+  isFinishedFirstview: boolean;
   currentDirectory: TerminalDirectory;
   finishFirstview: () => void;
   updateCurrentDirectory: (directory: TerminalDirectory) => void;
@@ -34,7 +34,7 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
   const [commandHistories, setCommandHistories] = useState<CommandHistory[]>(
     []
   );
-  const [finishedFirstview, setFinishedFirstview] = useState(false);
+  const [isFinishedFirstview, setIsFinishedFirstview] = useState(false);
   const [currentDirectory, setCurrentDirectory] =
     useState<TerminalDirectory | null>(null);
   const [isCommandRunning, setIsCommandRunning] = useState(false);
@@ -103,7 +103,7 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
   /**
    * 初回表示を終了する
    */
-  const finishFirstview = () => setFinishedFirstview(true);
+  const finishFirstview = () => setIsFinishedFirstview(true);
 
   /**
    * コマンド履歴をクリアする
@@ -146,7 +146,7 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
       value={{
         commandHistories,
         isCommandRunning,
-        finishedFirstview,
+        isFinishedFirstview,
         currentDirectory,
         finishFirstview,
         updateCurrentDirectory,
