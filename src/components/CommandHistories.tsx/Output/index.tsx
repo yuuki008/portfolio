@@ -29,26 +29,26 @@ export const CommandOutput = memo((props: Props) => {
       return <Ls history={props.commandHistory} />;
     case "cd":
       return <Cd history={props.commandHistory} />;
-    // case "cat":
-    //   return <Cat history={props.commandHistory} />;
-    // case "imgcat":
-    //   return <ImgCat history={props.commandHistory} />;
-    // case "exit":
-    //   return <Exit history={props.commandHistory} />;
-    // case "help":
-    //   return <Help history={props.commandHistory} />;
-    // case "rm":
-    //   return <Rm history={props.commandHistory} />;
-    // case "history":
-    //   return <History history={props.commandHistory} />;
-    // case "date":
-    //   return <Date history={props.commandHistory} />;
-    // case "tree":
-    //   return <Tree history={props.commandHistory} />;
-    // case "clear":
-    //   return <Clear history={props.commandHistory} />;
-    // case "wget":
-    //   return <Wget history={props.commandHistory} />;
+    case "cat":
+      return <Cat history={props.commandHistory} />;
+    case "imgcat":
+      return <ImgCat history={props.commandHistory} />;
+    case "exit":
+      return <Exit history={props.commandHistory} />;
+    case "help":
+      return <Help history={props.commandHistory} />;
+    case "rm":
+      return <Rm history={props.commandHistory} />;
+    case "history":
+      return <History history={props.commandHistory} />;
+    case "date":
+      return <Date history={props.commandHistory} />;
+    case "tree":
+      return <Tree history={props.commandHistory} />;
+    case "clear":
+      return <Clear history={props.commandHistory} />;
+    case "wget":
+      return <Wget history={props.commandHistory} />;
     case "":
       break;
     default:
