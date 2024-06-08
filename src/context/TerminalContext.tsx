@@ -62,18 +62,20 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
   /**
    * コマンドを実行し、キューに追加する
    */
-  const executeCommand = useCallback(
-    (command: string) => {
-      const commands = command.split("&").map((cmd) => cmd.trim());
-      setCommandQueue((prev) => [...prev, ...commands]);
+  const executeCommand = (command: string) => {
+    const commands = command.split("&").map((cmd) => cmd.trim());
 
-      if (!isCommandRunning) {
-        setIsCommandRunning(true);
-        executeNextCommand();
-      }
-    },
-    [isCommandRunning, executeNextCommand]
-  );
+    setIsCommandRunning(true);
+    const newCommand = {
+      command: commands[0],
+      isRunning: true,
+      id: Date.now(),
+    };
+    setCommandHistories((prev) => [...prev, newCommand]);
+    if (commands.length === 1) return;
+
+    setCommandQueue([...commands.slice(1)]);
+  };
 
   /**
    * コマンドの終了を通知し、次のコマンドを実行する

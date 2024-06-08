@@ -1,6 +1,5 @@
 import { TerminalProvider } from "@/context/TerminalContext";
 import "@/styles/globals.css";
-import "github-markdown-css/github-markdown-light.css";
 import type { AppProps } from "next/app";
 import { Space_Mono } from "next/font/google";
 import { statSync, readdirSync } from "fs";
