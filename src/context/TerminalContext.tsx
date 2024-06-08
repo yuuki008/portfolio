@@ -1,6 +1,6 @@
 import { TerminalDirectory, TerminalFile } from "@/utils/FileSystem";
 import React, { createContext, useEffect, useState } from "react";
-import { Resource } from "@/pages/_app";
+import { DirectoryResource, Resource } from "@/pages/_app";
 
 type TerminalContextType = {
   user: User | null;
@@ -98,11 +98,14 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
   const clearCommandHistories = () => setCommandHistories([]);
 
   useEffect(() => {
-    if (!rootDirectory) return;
+    if (rootDirectory.type != "directory") return;
 
     const root = new TerminalDirectory(rootDirectory.name);
 
-    const buildTree = (directory: TerminalDirectory, resource: Resource) => {
+    const buildTree = (
+      directory: TerminalDirectory,
+      resource: DirectoryResource
+    ) => {
       resource.children.forEach((child) => {
         if (child.type === "file") {
           const childFile = new TerminalFile(child.name);
