@@ -25,7 +25,7 @@ export type FileResource = {
 export type Resource = DirectoryResource | FileResource;
 
 type Props = {
-  rootDirectory: Resource;
+  rootDirectory: DirectoryResource;
 } & AppProps;
 
 function App({ Component, pageProps, rootDirectory }: Props) {
@@ -40,7 +40,7 @@ function App({ Component, pageProps, rootDirectory }: Props) {
   );
 }
 
-const readDirectory = (directoryPath: string): Resource => {
+const readDirectory = (directoryPath: string) => {
   const stat = statSync(directoryPath);
   if (!stat.isDirectory()) {
     throw new Error("The provided path is not a directory.");
