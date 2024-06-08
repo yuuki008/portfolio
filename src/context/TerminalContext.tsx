@@ -22,11 +22,13 @@ type Props = {
   rootDirectory: DirectoryResource;
 };
 
-type CommandHistory = {
+export type CommandHistory = {
   id: number;
   command: string;
   isRunning: boolean;
 };
+
+export const username = "guest";
 
 export function TerminalProvider({ children, rootDirectory }: Props) {
   const [commandHistories, setCommandHistories] = useState<CommandHistory[]>(

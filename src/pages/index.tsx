@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { TerminalContext } from "@/context/TerminalContext";
 import { CommandLine } from "@/components/CommandLine";
+import { CommandHistories } from "@/components/CommandHistories.tsx";
 
 export default function Home() {
   const { isCommandRunning } = useContext(TerminalContext);
@@ -26,6 +27,7 @@ export default function Home() {
 
   return (
     <div className="bg-black p-4 text-white">
+      <CommandHistories />
       <div>{isCommandRunning ? <></> : <CommandLine />}</div>
     </div>
   );
