@@ -1,18 +1,15 @@
 import { TerminalDirectory, TerminalFile } from "@/utils/FileSystem";
-import React, { createContext, useEffect, useState } from "react";
-import { DirectoryResource, Resource } from "@/pages/_app";
+import React, { createContext, useEffect, useState, useCallback } from "react";
+import { DirectoryResource } from "@/pages/_app";
 
 type TerminalContextType = {
-  user: User | null;
-  commandHistories: string[];
+  commandHistories: CommandHistory[];
   isCommandRunning: boolean;
   finishedFirstview: boolean;
   currentDirectory: TerminalDirectory;
   finishFirstview: () => void;
   updateCurrentDirectory: (directory: TerminalDirectory) => void;
-  finishCommand: () => void;
-  username: (name: string) => Promise<boolean>;
-  login: (name: string, password: string) => Promise<boolean>;
+  finishCommand: (id: number) => void;
   executeCommand: (command: string) => void;
   clearCommandHistories: () => void;
 };
@@ -22,84 +19,97 @@ export const TerminalContext = createContext<TerminalContextType>(
 
 type Props = {
   children: React.ReactNode;
-  rootDirectory: Resource;
+  rootDirectory: DirectoryResource;
 };
 
-type User = {
-  name: string;
-  role: string;
+type CommandHistory = {
+  id: number;
+  command: string;
+  isRunning: boolean;
 };
 
 export function TerminalProvider({ children, rootDirectory }: Props) {
-  const [isCommandRunning, setIsCommandRunning] = useState(false);
-  const [commandHistories, setCommandHistories] = useState<string[]>([]);
-  const [user, setUser] = useState<User | null>(null);
+  const [commandHistories, setCommandHistories] = useState<CommandHistory[]>(
+    []
+  );
   const [finishedFirstview, setFinishedFirstview] = useState(false);
-
   const [currentDirectory, setCurrentDirectory] =
     useState<TerminalDirectory | null>(null);
+  const [isCommandRunning, setIsCommandRunning] = useState(false);
+  const [commandQueue, setCommandQueue] = useState<string[]>([]);
 
-  const executeCommand = (command: string) => {
-    setIsCommandRunning(true);
-    setCommandHistories((prev) => [...prev, command]);
-  };
+  /**
+   * キュー内の次のコマンドを実行する
+   */
+  const executeNextCommand = useCallback(() => {
+    if (commandQueue.length === 0) {
+      setIsCommandRunning(false);
+      return;
+    }
 
-  const finishCommand = () => setIsCommandRunning(false);
+    const nextCommand = commandQueue[0];
+    const newCommand = {
+      command: nextCommand,
+      isRunning: true,
+      id: Date.now(),
+    };
+    setCommandHistories((prev) => [...prev, newCommand]);
+    setCommandQueue((prev) => prev.slice(1));
 
-  const login = async (name: string, password: string): Promise<boolean> => {
-    const res = await fetch("/api/login", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ name, password }),
-    }).then((res) => res.json());
+    // コマンドの実行はここで行う（例: コマンド実行関数を呼び出す）
+  }, [commandQueue]);
 
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        const user = res.user;
-        if (user) {
-          resolve(true);
-          setUser(user);
-          setCommandHistories(["welcome"]);
-        } else {
-          resolve(false);
-        }
-      }, 1500);
-    });
-  };
+  /**
+   * コマンドを実行し、キューに追加する
+   */
+  const executeCommand = useCallback(
+    (command: string) => {
+      const commands = command.split("&").map((cmd) => cmd.trim());
+      setCommandQueue((prev) => [...prev, ...commands]);
 
-  const username = async (name: string): Promise<boolean> => {
-    const res = await fetch("/api/username", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ name }),
-    });
+      if (!isCommandRunning) {
+        setIsCommandRunning(true);
+        executeNextCommand();
+      }
+    },
+    [isCommandRunning, executeNextCommand]
+  );
 
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        // NOTE: Visitor￼￼ユーザーはアクセスさせない
-        // if (res.status === 404) {
-        //   setUser({ name: "vistor", role: "vistor" });
-        //   setCommandHistories(["welcome"]);
-        // }
-        return resolve(res.status === 200);
-      }, 1500);
-    });
-  };
+  /**
+   * コマンドの終了を通知し、次のコマンドを実行する
+   */
+  const finishCommand = useCallback(
+    (id: number) => {
+      setCommandHistories((prev) =>
+        prev.map((command) =>
+          command.id === id ? { ...command, isRunning: false } : command
+        )
+      );
+      executeNextCommand();
+    },
+    [executeNextCommand]
+  );
 
+  /**
+   * 現在のディレクトリを更新する
+   */
   const updateCurrentDirectory = (directory: TerminalDirectory) =>
     setCurrentDirectory(directory);
 
+  /**
+   * 初回表示を終了する
+   */
   const finishFirstview = () => setFinishedFirstview(true);
 
+  /**
+   * コマンド履歴をクリアする
+   */
   const clearCommandHistories = () => setCommandHistories([]);
 
+  /**
+   * ディレクトリツリーを構築する
+   */
   useEffect(() => {
-    if (rootDirectory.type != "directory") return;
-
     const root = new TerminalDirectory(rootDirectory.name);
 
     const buildTree = (
@@ -130,7 +140,6 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
   return (
     <TerminalContext.Provider
       value={{
-        user,
         commandHistories,
         isCommandRunning,
         finishedFirstview,
@@ -138,8 +147,6 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
         finishFirstview,
         updateCurrentDirectory,
         finishCommand,
-        username,
-        login,
         executeCommand,
         clearCommandHistories,
       }}
