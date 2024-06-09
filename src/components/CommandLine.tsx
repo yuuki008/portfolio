@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TerminalContext } from "@/context/TerminalContext";
+import { TerminalContext, username } from "@/context/TerminalContext";
 
 export const CommandLine = () => {
   const {
@@ -49,7 +49,7 @@ export const CommandLine = () => {
 
   return (
     <div className="flex">
-      <span className="text-green-500">{"guest"}</span>
+      <span className="text-green-500">{username}</span>
       <span>:</span>
       <span className="text-blue-500">~{currentPath}</span>
       <span className="mx-1">$</span>
