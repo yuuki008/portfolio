@@ -51,7 +51,7 @@ export const Welcome = (props: Props) => {
           className="text-blue-400 underline ml-2"
           target="_blank"
         >
-          https://github.com/yuuki008/portfolio
+          https://github.com/yuuki008
         </a>
         <br />* Zenn:
         <a

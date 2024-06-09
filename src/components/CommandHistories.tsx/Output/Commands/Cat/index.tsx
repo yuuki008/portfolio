@@ -39,6 +39,8 @@ export const Cat = (props: Props) => {
   if (message) return message;
 
   return (
-    <div className="whitespace-pre-wrap text-[#00b6ee] my-2">{content}</div>
+    <div className="whitespace-pre-wrap m-4 text-sm  text-white font-helvetica">
+      {content}
+    </div>
   );
 };

@@ -1,0 +1,14 @@
+--- Languages ---
+  - JavaScript
+  - Ruby
+  - SQL
+  - C++
+
+--- Other ---
+  - React
+  - Next.js
+  - Ruby on Rails
+  - NestJS
+  - Prisma
+  - TypeScript
+  - Vue.js

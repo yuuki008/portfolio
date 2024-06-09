@@ -16,6 +16,8 @@ const config: Config = {
     },
     fontFamily: {
       digital: ['"digital-7"', "monospace"],
+      sans: ['"Noto Sans JP"', "sans-serif"],
+      helvetica: ["HelveticaNeueLTStd-Lt", "Helvetica", "Arial", "sans-serif"],
     },
   },
   plugins: [],
