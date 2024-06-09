@@ -30,7 +30,7 @@ type Props = {
 function App({ Component, pageProps, rootDirectory }: Props) {
   return (
     <TerminalProvider rootDirectory={rootDirectory}>
-      <main className={`${mono.className} bg-black`}>
+      <main className={`${mono.className} text-[15px] bg-black`}>
         <div className="overflow-y-scroll terminal min-h-screen bg-black">
           <Component {...pageProps} />
         </div>
