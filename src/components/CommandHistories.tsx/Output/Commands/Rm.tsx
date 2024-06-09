@@ -14,11 +14,13 @@ export const Rm = (props: Props) => {
 
   // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
   /* eslint-disable react-hooks/exhaustive-deps */
+  const IStillHavenotFoundWhatImLookingForUrl =
+    "https://www.youtube.com/watch?v=e3-5YC_oHjE";
   useEffect(() => {
     if (args[1] === "-rf") {
       setMessage("Don't worry, even rm -rf can't erase your talent 💪");
       setTimeout(() => {
-        window.open("https://www.youtube.com/watch?v=e3-5YC_oHjE", "_blank");
+        window.open(IStillHavenotFoundWhatImLookingForUrl, "_blank");
         finishCommand(props.command.id);
       }, 1500);
     } else {

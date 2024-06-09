@@ -28,17 +28,13 @@ export const Tree = (props: Props) => {
       );
       return (
         <div key={node.name}>
-          <div className="text-green-500 whitespace-wrap flex">
-            <div className="border-t border-green-500 mt-[12px] w-3 mr-2" />
-            {node.name}
-          </div>
-          <div className="ml-2">{children}</div>
+          <div className="text-green-500 whitespace-wrap flex">{node.name}</div>
+          <div className="ml-4">{children}</div>
         </div>
       );
     } else {
       return (
         <div key={node.name} className="text-green-500 whitespace-wrap flex">
-          <div className="border-t border-green-500 mt-[12px] w-3 mr-2" />
           {node.name}
         </div>
       );
