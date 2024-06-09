@@ -1,0 +1,4 @@
+このサイトは、 Typescript と Next.js と Tailwind を使って実装しました。
+
+ソースコードを公開しておりますので、ご興味ある方は覗いてみてください。
+https://github.com/yuuki008/portfolio
