@@ -3,7 +3,6 @@ import { TerminalContext } from "@/context/TerminalContext";
 import { CommandLine } from "@/components/CommandLine";
 import { CommandHistories } from "@/components/CommandHistories.tsx";
 import { FirstView } from "@/components/FirstView";
-import { classes } from "@/utils/classes";
 
 export default function Home() {
   const { isCommandRunning, isFinishedFirstview } = useContext(TerminalContext);
@@ -29,16 +28,14 @@ export default function Home() {
 
   return (
     <div className="bg-black p-4 text-white">
-      <FirstView />
-      <div
-        className={classes(
-          "relative z-10 bg-black transition-all duration-[2000ms] ease-in-out",
-          isFinishedFirstview ? "z-10 opacity-100" : "z-0 opacity-0"
-        )}
-      >
-        <CommandHistories />
-        <div>{isCommandRunning ? <></> : <CommandLine />}</div>
-      </div>
+      {isFinishedFirstview ? (
+        <div className="relative z-10 bg-black">
+          <CommandHistories />
+          <div>{isCommandRunning ? <></> : <CommandLine />}</div>
+        </div>
+      ) : (
+        <FirstView />
+      )}
     </div>
   );
 }
