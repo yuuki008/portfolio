@@ -18,7 +18,7 @@ export const Rm = (props: Props) => {
     if (args[1] === "-rf") {
       setMessage("Don't worry, even rm -rf can't erase your talent 💪");
       setTimeout(() => {
-        window.open("https://www.youtube.com/watch?v=gdZLi9oWNZg", "_blank");
+        window.open("https://www.youtube.com/watch?v=e3-5YC_oHjE", "_blank");
         finishCommand(props.command.id);
       }, 1500);
     } else {
