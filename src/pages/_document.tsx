@@ -52,7 +52,7 @@ export default function Document() {
       <meta name="twitter:image:type" content="article" />
       <meta name="twitter:image:width" content="1068" />
       <meta name="twitter:image:height" content="609" />
-      <link rel="icon" href="/logos/color.png" sizes="any" />
+      <link rel="icon" href="/images/logo.png" sizes="any" />
 
       <body>
         <Main />

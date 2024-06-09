@@ -27,18 +27,18 @@ export const FirstView = () => {
         onClickScreen={onClickScreen}
       />
 
-      <div className="absolute mt-[28vh] left-1/2 -translate-x-1/2 z-10 flex flex-col justify-center">
+      <div className="absolute mt-[20vh] left-1/2 -translate-x-1/2 z-10 flex flex-col justify-center">
         <Image
-          src="/logos/color.webp"
+          src="/images/logo.png"
           alt=""
-          width={230}
-          height={230}
-          className="w-[230px] h-[230px] mx-auto mb-5 rounded-full shadow-2xl"
+          width={280}
+          height={280}
+          className="w-[280px] h-[280px] mx-auto rounded-full shadow-2xl"
         />
-        <div className="backdrop-blur-sm p-4 bg-black bg-opacity-50 rounded z-10">
+        <div>
           <div className="text-white text-center">
-            <h1 className="text-4xl">{`Welcome to Yuuki008's Terminal`}</h1>
-            <p className="text-2xl mt-4">Click to start exploring...</p>
+            <h1 className="text-[40px] mb-2 font-bold">{`Hi, I'm Yuuki008`}</h1>
+            <p className="text-[25px]">click to start ...</p>
           </div>
         </div>
       </div>

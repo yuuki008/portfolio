@@ -7,6 +7,12 @@ type Props = {
   onClickScreen: () => void;
 };
 
+const katakana =
+  "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+
+const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const symbol = "!@#$%^&*()_+-=[]{}|;':,.<>?/`~";
+
 export const Matrix = (props: Props) => {
   useEffect(() => {
     const s = window.screen;
@@ -19,7 +25,7 @@ export const Matrix = (props: Props) => {
     const p = Array(Math.floor(w / 10) + 1).fill(0);
     const random = (items: string[]) =>
       items[Math.floor(Math.random() * items.length)];
-    const hex = "0123456789ABCDEF".split("");
+    const hex = (katakana + upperCase + symbol).split("");
 
     if (!ctx) return;
 
