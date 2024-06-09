@@ -39,7 +39,7 @@ export const Cat = (props: Props) => {
   if (message) return message;
 
   return (
-    <div className="whitespace-pre-wrap m-4 tracking-wider text-[12px]  text-white font-helvetica">
+    <div className="whitespace-pre-wrap m-4 tracking-wider text-[13px]  text-white font-helvetica">
       {content}
     </div>
   );
