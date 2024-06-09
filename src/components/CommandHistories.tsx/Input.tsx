@@ -23,7 +23,7 @@ const Input = memo((props: Props) => {
         <span>:</span>
         <span className="text-blue-500">~{currentPath}</span>
         <span className="mx-1">$</span>
-        <span>{props.commandHistory.command}</span>
+        <span>{props.commandHistory.input}</span>
       </p>
     </div>
   );

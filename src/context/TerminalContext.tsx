@@ -9,10 +9,11 @@ type TerminalContextType = {
   currentDirectory: TerminalDirectory;
   finishFirstview: () => void;
   updateCurrentDirectory: (directory: TerminalDirectory) => void;
-  finishCommand: (id: number) => void;
-  executeCommand: (command: string) => void;
+  finishCommand: (commandId: number) => void;
+  executeCommand: (input: string) => void;
   clearCommandHistories: () => void;
 };
+
 export const TerminalContext = createContext<TerminalContextType>(
   {} as TerminalContextType
 );
@@ -22,10 +23,17 @@ type Props = {
   rootDirectory: DirectoryResource;
 };
 
-export type CommandHistory = {
+export type Command = {
   id: number;
   command: string;
-  isRunning: boolean;
+  finished: boolean;
+  running: boolean;
+};
+
+export type CommandHistory = {
+  input: string;
+  commands: Command[];
+  finished: boolean;
 };
 
 export const username = "guest";
@@ -38,7 +46,7 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
   const [currentDirectory, setCurrentDirectory] =
     useState<TerminalDirectory | null>(null);
   const [isCommandRunning, setIsCommandRunning] = useState(false);
-  const [commandQueue, setCommandQueue] = useState<string[]>([]);
+  const [commandQueue, setCommandQueue] = useState<Command[]>([]);
 
   /**
    * キュー内の次のコマンドを実行する
@@ -50,45 +58,61 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
     }
 
     const nextCommand = commandQueue[0];
-    const newCommand = {
-      command: nextCommand,
-      isRunning: true,
-      id: Date.now(),
-    };
-    setCommandHistories((prev) => [...prev, newCommand]);
     setCommandQueue((prev) => prev.slice(1));
 
-    // コマンドの実行はここで行う（例: コマンド実行関数を呼び出す）
+    setCommandHistories((prev) =>
+      prev.map((history) =>
+        history.commands.some((cmd) => cmd.id === nextCommand.id)
+          ? {
+              ...history,
+              commands: history.commands.map((cmd) =>
+                cmd.id === nextCommand.id ? { ...cmd, running: true } : cmd
+              ),
+            }
+          : history
+      )
+    );
   }, [commandQueue]);
 
   /**
-   * コマンドを実行し、キューに追加する
+   * 入力されたコマンドを実行し、キューに追加する
    */
-  const executeCommand = (command: string) => {
-    const commands = command.split("&").map((cmd) => cmd.trim());
+  const executeCommand = (input: string) => {
+    const commands = input.split("&").map((cmd, index) => ({
+      id: Date.now() + index,
+      command: cmd.trim(),
+      finished: false,
+      running: index === 0,
+    }));
 
+    setCommandHistories((prev) => [
+      ...prev,
+      { input, commands, finished: false },
+    ]);
+
+    setCommandQueue(commands.slice(1));
     setIsCommandRunning(true);
-    const newCommand = {
-      command: commands[0],
-      isRunning: true,
-      id: Date.now(),
-    };
-    setCommandHistories((prev) => [...prev, newCommand]);
-    if (commands.length === 1) return;
-
-    setCommandQueue([...commands.slice(1)]);
   };
 
   /**
-   * コマンドの終了を通知し、次のコマンドを実行する
+   * 指定されたコマンドIDのコマンドを完了し、次のコマンドを実行する
    */
   const finishCommand = useCallback(
-    (id: number) => {
+    (commandId: number) => {
       setCommandHistories((prev) =>
-        prev.map((command) =>
-          command.id === id ? { ...command, isRunning: false } : command
-        )
+        prev.map((history) => ({
+          ...history,
+          commands: history.commands.map((cmd) =>
+            cmd.id === commandId
+              ? { ...cmd, running: false, finished: true }
+              : cmd
+          ),
+          finished: history.commands.every((cmd) =>
+            cmd.id === commandId ? true : cmd.finished
+          ),
+        }))
       );
+
       executeNextCommand();
     },
     [executeNextCommand]
@@ -125,13 +149,12 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
           const childFile = new TerminalFile(child.name);
           childFile.parent = directory;
           directory.children.push(childFile);
-          return;
+        } else {
+          const childDirectory = new TerminalDirectory(child.name);
+          directory.children.push(childDirectory);
+          childDirectory.parent = directory;
+          buildTree(childDirectory, child);
         }
-
-        const childDirectory = new TerminalDirectory(child.name);
-        directory.children.push(childDirectory);
-        childDirectory.parent = directory;
-        buildTree(childDirectory, child);
       });
     };
 
@@ -139,6 +162,7 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
     setCurrentDirectory(root);
   }, [rootDirectory]);
 
+  // 現在のディレクトリが設定されていない場合、何も表示しない
   if (!currentDirectory) return <></>;
 
   return (

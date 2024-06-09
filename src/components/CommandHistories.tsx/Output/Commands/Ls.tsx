@@ -1,10 +1,10 @@
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 import { classes } from "@/utils/classes";
 import { TerminalDirectory } from "@/utils/FileSystem";
 import { useContext, useEffect, useState } from "react";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 export const Ls = (props: Props) => {
@@ -13,7 +13,7 @@ export const Ls = (props: Props) => {
   const [directory, _setDirectory] = useState(currentDirectory);
 
   /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => finishCommand(props.history.id), []);
+  useEffect(() => finishCommand(props.command.id), []);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   return (

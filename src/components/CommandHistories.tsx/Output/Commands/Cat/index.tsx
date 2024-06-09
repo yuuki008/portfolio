@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 export const Cat = (props: Props) => {
-  const fileName = props.history.command.split(" ")[1];
+  const fileName = props.command.command.split(" ")[1];
   const extention = fileName.split(".").slice(-1)[0];
   const { currentDirectory, finishCommand } = useContext(TerminalContext);
 
@@ -24,12 +24,12 @@ export const Cat = (props: Props) => {
       const res = await fetch(`${directory.path()}/${fileName}`);
       if (!res.ok) {
         setMessage(`${fileName}: No such file`);
-        return finishCommand(props.history.id);
+        return finishCommand(props.command.id);
       }
 
       const text = await res.text();
       setContent(text);
-      finishCommand(props.history.id);
+      finishCommand(props.command.id);
     };
 
     f();

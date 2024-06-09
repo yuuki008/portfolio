@@ -1,8 +1,8 @@
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 import React, { useContext, useEffect, useState } from "react";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 export const DateCommand = (props: Props) => {
@@ -13,7 +13,7 @@ export const DateCommand = (props: Props) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     setDate(new Date().toLocaleString());
-    finishCommand(props.history.id);
+    finishCommand(props.command.id);
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */
 

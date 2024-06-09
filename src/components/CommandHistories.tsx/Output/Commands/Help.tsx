@@ -1,4 +1,7 @@
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import {
+  Command as CommandType,
+  TerminalContext,
+} from "@/context/TerminalContext";
 import { useContext, useEffect } from "react";
 
 const basicCommands = [
@@ -35,7 +38,7 @@ const basicCommands = [
     description: "Display this help message",
   },
   {
-    command: "history",
+    command: "command",
     description: "Display a list of all commands entered",
   },
   {
@@ -71,7 +74,7 @@ const Command = (props: CommandProps) => {
 };
 
 type HelpProps = {
-  history: CommandHistory;
+  command: CommandType;
 };
 export const Help = (props: HelpProps) => {
   const { finishCommand } = useContext(TerminalContext);
@@ -79,7 +82,7 @@ export const Help = (props: HelpProps) => {
   // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    finishCommand(props.history.id);
+    finishCommand(props.command.id);
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */
 

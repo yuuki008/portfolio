@@ -1,9 +1,9 @@
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 import { TerminalDirectory } from "@/utils/FileSystem";
 import { useContext, useEffect, useState } from "react";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 export const Cd = (props: Props) => {
@@ -23,7 +23,7 @@ export const Cd = (props: Props) => {
   // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    const path = props.history.command.split(" ")[1];
+    const path = props.command.command.split(" ")[1];
 
     if (path == "/" || path == "~" || !path) {
       const dir = root(currentDirectory);
@@ -54,7 +54,7 @@ export const Cd = (props: Props) => {
     }
     updateCurrentDirectory(current);
 
-    finishCommand(props.history.id);
+    finishCommand(props.command.id);
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */
 

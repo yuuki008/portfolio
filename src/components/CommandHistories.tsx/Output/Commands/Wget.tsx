@@ -1,12 +1,12 @@
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 import { useContext, useEffect, useState } from "react";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 export const Wget = (props: Props) => {
-  const filename = props.history.command.split(" ")[1];
+  const filename = props.command.command.split(" ")[1];
   const { currentDirectory, finishCommand } = useContext(TerminalContext);
 
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -19,7 +19,7 @@ export const Wget = (props: Props) => {
 
       if (!response.ok) {
         setErrorMessage("File not found");
-        finishCommand(props.history.id);
+        finishCommand(props.command.id);
         return;
       }
 
@@ -32,7 +32,7 @@ export const Wget = (props: Props) => {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      finishCommand(props.history.id);
+      finishCommand(props.command.id);
     };
     f();
   }, []);

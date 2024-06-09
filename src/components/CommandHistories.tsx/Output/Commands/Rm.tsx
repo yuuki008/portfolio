@@ -1,13 +1,13 @@
 // NOTE: 健太さんの案
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 import { useContext, useEffect, useState } from "react";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 export const Rm = (props: Props) => {
-  const args = props.history.command.split(" ");
+  const args = props.command.command.split(" ");
   const { finishCommand } = useContext(TerminalContext);
 
   const [message, setMessage] = useState<string>("");
@@ -19,11 +19,11 @@ export const Rm = (props: Props) => {
       setMessage("Don't worry, even rm -rf can't erase your talent 💪");
       setTimeout(() => {
         window.open("https://www.youtube.com/watch?v=gdZLi9oWNZg", "_blank");
-        finishCommand(props.history.id);
+        finishCommand(props.command.id);
       }, 1500);
     } else {
       setMessage("No one can erase our memories...");
-      finishCommand(props.history.id);
+      finishCommand(props.command.id);
     }
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */

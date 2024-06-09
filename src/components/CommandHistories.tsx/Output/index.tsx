@@ -12,49 +12,57 @@ import { Clear } from "./Commands/Clear";
 import { Rm } from "./Commands/Rm";
 import { Wget } from "./Commands/Wget";
 import { Exit } from "./Commands/Exit";
-import { CommandHistory } from "@/context/TerminalContext";
+import { Command, CommandHistory } from "@/context/TerminalContext";
 
 type Props = {
   commandHistory: CommandHistory;
 };
 
-export const CommandOutput = memo((props: Props) => {
-  const { command } = props.commandHistory;
+const CommandOutput = (props: { command: Command }) => {
+  if (!props.command.running && !props.command.finished) return <></>;
 
-  const tokens = command.trim().split(" ");
+  const tokens = props.command.command.split(" ");
   const commandName = tokens[0];
 
   switch (commandName) {
     case "ls":
-      return <Ls history={props.commandHistory} />;
+      return <Ls command={props.command} />;
     case "cd":
-      return <Cd history={props.commandHistory} />;
+      return <Cd command={props.command} />;
     case "cat":
-      return <Cat history={props.commandHistory} />;
+      return <Cat command={props.command} />;
     case "imgcat":
-      return <ImgCat history={props.commandHistory} />;
+      return <ImgCat command={props.command} />;
     case "exit":
-      return <Exit history={props.commandHistory} />;
+      return <Exit command={props.command} />;
     case "help":
-      return <Help history={props.commandHistory} />;
+      return <Help command={props.command} />;
     case "rm":
-      return <Rm history={props.commandHistory} />;
+      return <Rm command={props.command} />;
     case "history":
-      return <History history={props.commandHistory} />;
+      return <History command={props.command} />;
     case "date":
-      return <Date history={props.commandHistory} />;
+      return <Date command={props.command} />;
     case "tree":
-      return <Tree history={props.commandHistory} />;
+      return <Tree command={props.command} />;
     case "clear":
-      return <Clear history={props.commandHistory} />;
+      return <Clear command={props.command} />;
     case "wget":
-      return <Wget history={props.commandHistory} />;
+      return <Wget command={props.command} />;
     case "":
       break;
     default:
-      return <NotFoundCommand history={props.commandHistory} />;
+      return <NotFoundCommand command={props.command} />;
   }
+};
+
+export const Output = memo((props: Props) => {
+  const { commands } = props.commandHistory;
+
+  return commands.map((command) => (
+    <CommandOutput key={command.id} command={command} />
+  ));
 });
 
-CommandOutput.displayName = "CommandOutput";
-export default CommandOutput;
+Output.displayName = "Output";
+export default Output;

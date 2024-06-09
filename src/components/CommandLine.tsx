@@ -43,7 +43,7 @@ export const CommandLine = () => {
 
   useEffect(() => {
     if (historyIndex < commandHistories.length) {
-      setCommand(commandHistories[historyIndex].command);
+      setCommand(commandHistories[historyIndex].input);
     }
   }, [historyIndex, commandHistories]);
 

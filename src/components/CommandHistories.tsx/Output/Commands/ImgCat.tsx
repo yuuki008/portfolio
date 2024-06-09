@@ -1,9 +1,9 @@
-import { CommandHistory, TerminalContext } from "@/context/TerminalContext";
+import { Command, TerminalContext } from "@/context/TerminalContext";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 type Props = {
-  history: CommandHistory;
+  command: Command;
 };
 
 const extentions = ["png", "jpg", "jpeg", "webp", "gif", "svg", "ico"];
@@ -11,7 +11,7 @@ const extentions = ["png", "jpg", "jpeg", "webp", "gif", "svg", "ico"];
 export const ImgCat = (props: Props) => {
   const { finishCommand, currentDirectory } = useContext(TerminalContext);
 
-  const fileName = props.history.command.split(" ")[1];
+  const fileName = props.command.command.split(" ")[1];
   const [url, setUrl] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -21,19 +21,19 @@ export const ImgCat = (props: Props) => {
     const f = async () => {
       const extention = fileName.split(".").slice(-1)[0];
       if (!extentions.includes(extention)) {
-        finishCommand(props.history.id);
+        finishCommand(props.command.id);
         return setErrorMessage(`${fileName}: Not an image file`);
       }
 
       const res = await fetch(`${currentDirectory.path()}/${fileName}`);
       if (!res.ok) {
-        finishCommand(props.history.id);
+        finishCommand(props.command.id);
         return setErrorMessage(`${fileName}: No such file`);
       }
 
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
-      finishCommand(props.history.id);
+      finishCommand(props.command.id);
       setUrl(url);
     };
     f();
