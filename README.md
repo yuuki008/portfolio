@@ -17,4 +17,5 @@ npm install
 
 ```bash
 yarn dev
+npm run dev
 ```
