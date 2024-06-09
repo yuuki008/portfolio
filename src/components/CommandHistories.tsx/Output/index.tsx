@@ -13,6 +13,7 @@ import { Rm } from "./Commands/Rm";
 import { Wget } from "./Commands/Wget";
 import { Exit } from "./Commands/Exit";
 import { Command, CommandHistory } from "@/context/TerminalContext";
+import { Welcome } from "./Commands/Welcome";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -49,6 +50,8 @@ const CommandOutput = (props: { command: Command }) => {
       return <Clear command={props.command} />;
     case "wget":
       return <Wget command={props.command} />;
+    case "welcome":
+      return <Welcome command={props.command} />;
     case "":
       break;
     default:

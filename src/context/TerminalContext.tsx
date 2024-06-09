@@ -39,9 +39,13 @@ export type CommandHistory = {
 export const username = "guest";
 
 export function TerminalProvider({ children, rootDirectory }: Props) {
-  const [commandHistories, setCommandHistories] = useState<CommandHistory[]>(
-    []
-  );
+  const [commandHistories, setCommandHistories] = useState<CommandHistory[]>([
+    {
+      input: "welcome",
+      commands: [{ id: 1, command: "welcome", finished: true, running: false }],
+      finished: true,
+    },
+  ]);
   const [isFinishedFirstview, setIsFinishedFirstview] = useState(false);
   const [currentDirectory, setCurrentDirectory] =
     useState<TerminalDirectory | null>(null);
