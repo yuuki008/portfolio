@@ -4,6 +4,10 @@ import type { AppProps } from "next/app";
 import { Space_Mono } from "next/font/google";
 import { statSync, readdirSync } from "fs";
 import { join, basename } from "path";
+import { useEffect } from "react";
+import Script from "next/script";
+import { useRouter } from "next/router";
+import { GA_TRACKING_ID } from "@/utils/gtag";
 
 const mono = Space_Mono({
   weight: ["400", "700"],
@@ -28,14 +32,48 @@ type Props = {
 } & AppProps;
 
 function App({ Component, pageProps, rootDirectory }: Props) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      window.gtag("config", GA_TRACKING_ID, {
+        page_path: url,
+      });
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
+
   return (
-    <TerminalProvider rootDirectory={rootDirectory}>
-      <main className={`${mono.className} text-[15px] bg-black`}>
-        <div className="overflow-y-scroll terminal min-h-screen bg-black">
-          <Component {...pageProps} />
-        </div>
-      </main>
-    </TerminalProvider>
+    <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_TRACKING_ID}');
+          `,
+        }}
+      />
+      <TerminalProvider rootDirectory={rootDirectory}>
+        <main className={`${mono.className} text-[15px] bg-black`}>
+          <div className="overflow-y-scroll terminal min-h-screen bg-black">
+            <Component {...pageProps} />
+          </div>
+        </main>
+      </TerminalProvider>
+    </>
   );
 }
 

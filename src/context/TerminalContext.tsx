@@ -1,6 +1,7 @@
 import { TerminalDirectory, TerminalFile } from "@/utils/FileSystem";
 import React, { createContext, useEffect, useState, useCallback } from "react";
 import { DirectoryResource } from "@/pages/_app";
+import { commandEvent } from "../utils/gtag";
 
 type TerminalContextType = {
   commandHistories: CommandHistory[];
@@ -82,6 +83,7 @@ export function TerminalProvider({ children, rootDirectory }: Props) {
    * 入力されたコマンドを実行し、キューに追加する
    */
   const executeCommand = (input: string) => {
+    commandEvent(input);
     const commands = input.split("&").map((cmd, index) => ({
       id: Date.now() + index,
       command: cmd.trim(),
