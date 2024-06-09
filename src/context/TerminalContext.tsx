@@ -37,7 +37,7 @@ export type CommandHistory = {
   finished: boolean;
 };
 
-export const username = "guest";
+export const username = "visitor";
 
 export function TerminalProvider({ children, rootDirectory }: Props) {
   const [commandHistories, setCommandHistories] = useState<CommandHistory[]>([
