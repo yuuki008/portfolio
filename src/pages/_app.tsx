@@ -34,6 +34,8 @@ type Props = {
 function App({ Component, pageProps, rootDirectory }: Props) {
   const router = useRouter();
 
+  // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       window.gtag("config", GA_TRACKING_ID, {
@@ -46,6 +48,7 @@ function App({ Component, pageProps, rootDirectory }: Props) {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <>
