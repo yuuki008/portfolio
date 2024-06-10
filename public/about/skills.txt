@@ -1,7 +1,7 @@
 --- Programming Languages ---
 - JavaScript (4 years)
 - Ruby (2 years)
-- SQL (3 years)
+- SQL (2 years)
 - C++ (2 months)
 
 --- Frontend Development ---
