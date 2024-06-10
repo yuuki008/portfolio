@@ -18,13 +18,19 @@ export const Cat = (props: Props) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const f = async () => {
-      if (extention !== "txt" && extention !== "md")
+      if (extention !== "txt" && extention !== "md") {
         setMessage(`${fileName}: Not a text file`);
+        finishCommand(props.command.id);
+        return;
+      }
 
       const res = await fetch(`${directory.path()}/${fileName}`);
       if (!res.ok) {
-        setMessage(`${fileName}: No such file`);
-        return finishCommand(props.command.id);
+        setTimeout(() => {
+          setMessage(`${fileName}: No such file`);
+          finishCommand(props.command.id);
+        }, 300);
+        return;
       }
 
       const text = await res.text();
