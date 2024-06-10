@@ -22,6 +22,10 @@ const basicCommands = [
     description: "Concatenate and display the content of files",
   },
   {
+    command: "preview [markdown_file]",
+    description: "Display a preview of a markdown file",
+  },
+  {
     command: "imgcat [image_file]",
     description: "Display an image",
   },
@@ -52,6 +56,10 @@ const basicCommands = [
   {
     command: "rm",
     description: "Do not execute this command",
+  },
+  {
+    command: "history",
+    description: "Display a list of all commands entered",
   },
 ];
 

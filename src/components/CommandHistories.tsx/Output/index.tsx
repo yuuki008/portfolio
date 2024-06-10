@@ -14,6 +14,7 @@ import { Wget } from "./Commands/Wget";
 import { Exit } from "./Commands/Exit";
 import { Command, CommandHistory } from "@/context/TerminalContext";
 import { Welcome } from "./Commands/Welcome";
+import { Preview } from "./Commands/Preview";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -32,6 +33,8 @@ const CommandOutput = (props: { command: Command }) => {
       return <Cd command={props.command} />;
     case "cat":
       return <Cat command={props.command} />;
+    case "preview":
+      return <Preview command={props.command} />;
     case "imgcat":
       return <ImgCat command={props.command} />;
     case "exit":

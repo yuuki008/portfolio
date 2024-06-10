@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
+import { marked } from "marked";
 import { Command, TerminalContext } from "@/context/TerminalContext";
 
 type Props = {
   command: Command;
 };
 
-export const Cat = (props: Props) => {
+export const Preview = (props: Props) => {
   const fileName = props.command.command.split(" ")[1];
   const extention = fileName.split(".").slice(-1)[0];
   const { currentDirectory, finishCommand } = useContext(TerminalContext);
@@ -13,13 +14,12 @@ export const Cat = (props: Props) => {
   const [directory, _setDirectory] = useState(currentDirectory);
   const [message, setMessage] = useState("");
   const [content, setContent] = useState("");
-
   // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const f = async () => {
-      if (extention !== "txt" && extention !== "md") {
-        setMessage(`${fileName}: Not a text file`);
+      if (extention !== "md") {
+        setMessage(`${fileName}: Not a markdown file`);
         finishCommand(props.command.id);
         return;
       }
@@ -34,9 +34,10 @@ export const Cat = (props: Props) => {
       }
 
       const text = await res.text();
+      const html = await marked(text);
 
       setTimeout(() => {
-        setContent(text);
+        setContent(html);
         finishCommand(props.command.id);
       }, 600);
     };
@@ -48,15 +49,10 @@ export const Cat = (props: Props) => {
   if (message) return message;
 
   if (!content) return "Loading...";
-
   return (
-    <div className="border m-3 max-w-[1000px]">
-      <div className="flex p-2 border-b">File: {fileName} </div>
-      <div className="p-4">
-        <div className="whitespace-pre-wrap tracking-wider text-white">
-          {content}
-        </div>
-      </div>
-    </div>
+    <div
+      className="markdown-body"
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
   );
 };
