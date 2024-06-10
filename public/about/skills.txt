@@ -2,7 +2,7 @@
 - JavaScript (4 years)
 - Ruby (2 years)
 - SQL (2 years)
-- C++ (2 months)
+- C++ (1 months)
 
 --- Frontend Development ---
 - HTML
