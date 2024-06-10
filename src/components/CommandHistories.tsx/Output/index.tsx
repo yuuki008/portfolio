@@ -63,7 +63,7 @@ export const Output = memo((props: Props) => {
   const { commands } = props.commandHistory;
 
   return commands.map((command) => (
-    <div className="mb-4" key={command.id}>
+    <div className="mb-2" key={command.id}>
       <CommandOutput command={command} />
     </div>
   ));

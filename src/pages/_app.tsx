@@ -9,11 +9,6 @@ import Script from "next/script";
 import { useRouter } from "next/router";
 import { GA_TRACKING_ID } from "@/utils/gtag";
 
-const mono = Space_Mono({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-});
-
 export type DirectoryResource = {
   name: string;
   type: "directory";
@@ -70,7 +65,7 @@ function App({ Component, pageProps, rootDirectory }: Props) {
         }}
       />
       <TerminalProvider rootDirectory={rootDirectory}>
-        <main className={`${mono.className} text-[15px] bg-black`}>
+        <main className={`font-terminal text-[14px] bg-black`}>
           <div className="overflow-y-scroll terminal min-h-screen bg-black">
             <Component {...pageProps} />
           </div>

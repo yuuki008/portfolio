@@ -28,8 +28,11 @@ export const Cat = (props: Props) => {
       }
 
       const text = await res.text();
-      setContent(text);
-      finishCommand(props.command.id);
+
+      setTimeout(() => {
+        setContent(text);
+        finishCommand(props.command.id);
+      }, 600);
     };
 
     f();
@@ -38,9 +41,14 @@ export const Cat = (props: Props) => {
 
   if (message) return message;
 
+  if (!content) return "Loading...";
+
   return (
-    <div className="whitespace-pre-wrap m-4 tracking-wider text-[13px]  text-white font-helvetica">
-      {content}
+    <div className="border m-3 max-w-[1000px]">
+      <div className="flex p-2 border-b">File: {fileName} </div>
+      <div className="p-4 whitespace-pre-wrap tracking-wider text-white">
+        {content}
+      </div>
     </div>
   );
 };

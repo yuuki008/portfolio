@@ -15,6 +15,7 @@ const config: Config = {
       },
     },
     fontFamily: {
+      terminal: ["Menlo", "Monaco", "Consolas", "Courier New", "monospace"],
       digital: ['"digital-7"', "monospace"],
       sans: ['"Noto Sans JP"', "sans-serif"],
       helvetica: ["HelveticaNeueLTStd-Lt", "Helvetica", "Arial", "sans-serif"],

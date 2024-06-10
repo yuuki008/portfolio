@@ -1,10 +1,10 @@
---- Languages ---
+Languages
   - JavaScript
   - Ruby
   - SQL
   - C++
 
---- Other ---
+Other
   - React
   - Next.js
   - Ruby on Rails
