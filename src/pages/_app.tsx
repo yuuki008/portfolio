@@ -1,7 +1,7 @@
 import { TerminalProvider } from "@/context/TerminalContext";
 import "@/styles/globals.css";
+import "@/styles/markdown.css";
 import type { AppProps } from "next/app";
-import { Space_Mono } from "next/font/google";
 import { statSync, readdirSync } from "fs";
 import { join, basename } from "path";
 import { useEffect } from "react";

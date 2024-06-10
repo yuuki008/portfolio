@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Command, TerminalContext } from "@/context/TerminalContext";
+import { Txt } from "./Txt";
+import { Markdown } from "./Markdown";
 
 type Props = {
   command: Command;
@@ -49,12 +51,9 @@ export const Cat = (props: Props) => {
 
   if (!content) return "Loading...";
 
-  return (
-    <div className="border m-3 max-w-[1000px]">
-      <div className="flex p-2 border-b">File: {fileName} </div>
-      <div className="p-4 whitespace-pre-wrap tracking-wider text-white">
-        {content}
-      </div>
-    </div>
+  return extention === "txt" ? (
+    <Txt fileName={fileName} content={content} />
+  ) : (
+    <Markdown content={content} />
   );
 };
