@@ -35,10 +35,6 @@ const basicCommands = [
   },
   {
     command: "help",
-    description: "Display this help message",
-  },
-  {
-    command: "command",
     description: "Display a list of all commands entered",
   },
   {
