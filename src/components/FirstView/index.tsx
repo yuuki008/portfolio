@@ -19,7 +19,7 @@ export const FirstView = () => {
       onClick={onClickScreen}
       className={classes(
         "fixed top-0 left-0 w-screen h-screen overflow-hidden transition-all duration-[3000ms] ease-in-out",
-        isEndHackingAnimation ? "opacity-0" : "opacity-100"
+        isEndHackingAnimation ? "opacity-0 z-0" : "opacity-100 z-[100]"
       )}
     >
       <Matrix
