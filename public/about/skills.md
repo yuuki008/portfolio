@@ -1,10 +1,14 @@
---- Programming Languages ---
+# Skills
+
+## Programming Languages
+
 - JavaScript (4 years)
 - Ruby (2 years)
 - SQL (2 years)
-- C++ (1 months)
+- C++ (1 month)
 
---- Frontend Development ---
+## Frontend Development
+
 - HTML
 - CSS
 - JavaScript
@@ -12,23 +16,27 @@
 - Next.js
 - Vue.js
 
---- Backend Development ---
+## Backend Development
+
 - Node.js
 - Ruby on Rails
 - NestJS
 - Prisma
 
---- Databases ---
+## Databases
+
 - MySQL
 - PostgreSQL
 - Firebase
 
---- Tools & Technologies ---
+## Tools & Technologies
+
 - Git & GitHub
 - Docker
 - Google Cloud Platform
 - CI/CD (CircleCI, GitHub Actions)
 
---- Testing Frameworks ---
+## Testing Frameworks
+
 - Jest
 - RSpec
