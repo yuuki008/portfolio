@@ -18,13 +18,11 @@ const Input = memo((props: Props) => {
 
   return (
     <div>
-      <p className="flex">
-        <span className="text-green-500">{username}</span>
-        <span>:</span>
-        <span className="text-blue-500">~{currentPath}</span>
-        <span className="mx-1">$</span>
+      <div className="text-blue-500 font-[600]">{"~" + currentPath}</div>
+      <div className="flex">
+        <span className="mr-2 text-green-500">{"❯"}</span>
         <span>{props.commandHistory.input}</span>
-      </p>
+      </div>
     </div>
   );
 });

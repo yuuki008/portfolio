@@ -48,23 +48,23 @@ export const CommandLine = () => {
   }, [historyIndex, commandHistories]);
 
   return (
-    <div className="flex">
-      <span className="text-green-500">{username}</span>
-      <span>:</span>
-      <span className="text-blue-500">~{currentPath}</span>
-      <span className="mx-1">$</span>
-      <form onSubmit={handleSubmit} className="flex items-center">
-        <input
-          onKeyDown={handleKeyDown}
-          autoFocus={true}
-          autoComplete="off"
-          type="text"
-          max={50}
-          onChange={handleCommandChange}
-          value={command}
-          className="w-[400px] max-w-[400px] focus:outline-none bg-transparent appearance-none border-none overflow-visible"
-        />
-      </form>
+    <div>
+      <div className="text-blue-500 font-[600]">{"~" + currentPath}</div>
+      <div className="flex">
+        <span className="mr-2 text-green-500">{"❯"}</span>
+        <form onSubmit={handleSubmit} className="flex items-center">
+          <input
+            onKeyDown={handleKeyDown}
+            autoFocus={true}
+            autoComplete="off"
+            type="text"
+            max={50}
+            onChange={handleCommandChange}
+            value={command}
+            className="w-[400px] max-w-[400px] focus:outline-none bg-transparent appearance-none border-none overflow-visible"
+          />
+        </form>
+      </div>
     </div>
   );
 };
