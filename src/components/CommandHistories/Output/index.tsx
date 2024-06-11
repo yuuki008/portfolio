@@ -18,6 +18,7 @@ import { Preview } from "./Commands/Preview";
 import { Vim } from "./Commands/Vim";
 import { Emacs } from "./Commands/Emacs";
 import { Vi } from "./Commands/Vi";
+import { Git } from "./Commands/Git";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -65,6 +66,8 @@ const CommandOutput = (props: { command: Command }) => {
       return <Vi command={props.command} />;
     case "emacs":
       return <Emacs command={props.command} />;
+    case "git":
+      return <Git command={props.command} />;
     case "":
       break;
     default:
