@@ -17,6 +17,7 @@ import { Welcome } from "./Commands/Welcome";
 import { Preview } from "./Commands/Preview";
 import { Vim } from "./Commands/Vim";
 import { Emacs } from "./Commands/Emacs";
+import { Vi } from "./Commands/Vi";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -60,6 +61,8 @@ const CommandOutput = (props: { command: Command }) => {
     // 隠しコマンド
     case "vim":
       return <Vim command={props.command} />;
+    case "vi":
+      return <Vi command={props.command} />;
     case "emacs":
       return <Emacs command={props.command} />;
     case "":
