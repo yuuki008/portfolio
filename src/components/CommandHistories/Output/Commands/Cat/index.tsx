@@ -6,10 +6,9 @@ type Props = {
 };
 
 export const Cat = (props: Props) => {
-  const fileName = props.command.command.split(" ")[1];
-  const extention = fileName.split(".").slice(-1)[0];
   const { currentDirectory, finishCommand } = useContext(TerminalContext);
 
+  const [fileName, setFileName] = useState<string>("");
   const [directory, _setDirectory] = useState(currentDirectory);
   const [message, setMessage] = useState("");
   const [content, setContent] = useState("");
@@ -18,6 +17,17 @@ export const Cat = (props: Props) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const f = async () => {
+      const fileName = props.command.command.split(" ")[1];
+      if (!fileName) {
+        setMessage("cat: missing file operand");
+        finishCommand(props.command.id);
+        return;
+      }
+
+      setFileName(fileName);
+
+      const extention = fileName.split(".").slice(-1)[0];
+
       if (extention !== "txt" && extention !== "md") {
         setMessage(`${fileName}: Not a text file`);
         finishCommand(props.command.id);
