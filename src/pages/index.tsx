@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { TerminalContext } from "@/context/TerminalContext";
 import { CommandLine } from "@/components/CommandLine";
-import { CommandHistories } from "@/components/CommandHistories.tsx";
+import { CommandHistories } from "@/components/CommandHistories";
 import { FirstView } from "@/components/FirstView";
 import { classes } from "@/utils/classes";
 
