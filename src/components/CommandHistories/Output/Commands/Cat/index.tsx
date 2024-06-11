@@ -47,7 +47,7 @@ export const Cat = (props: Props) => {
 
   if (message) return message;
 
-  if (!content) return "Loading...";
+  if (!content) return "";
 
   return (
     <div className="border m-3 max-w-[1000px]">

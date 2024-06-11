@@ -48,7 +48,7 @@ export const Preview = (props: Props) => {
 
   if (message) return message;
 
-  if (!content) return "Loading...";
+  if (!content) return "";
   return (
     <div
       className="markdown-body"

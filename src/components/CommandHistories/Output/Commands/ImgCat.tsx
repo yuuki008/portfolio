@@ -48,7 +48,7 @@ export const ImgCat = (props: Props) => {
   /* eslint-enable react-hooks/exhaustive-deps */
 
   if (errorMessage) return errorMessage;
-  if (!url) return "Loading...";
+  if (!url) return "";
 
   return (
     <div className="my-4">
