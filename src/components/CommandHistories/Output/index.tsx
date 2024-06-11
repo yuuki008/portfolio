@@ -15,6 +15,8 @@ import { Exit } from "./Commands/Exit";
 import { Command, CommandHistory } from "@/context/TerminalContext";
 import { Welcome } from "./Commands/Welcome";
 import { Preview } from "./Commands/Preview";
+import { Vim } from "./Commands/Vim";
+import { Emacs } from "./Commands/Emacs";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -55,6 +57,11 @@ const CommandOutput = (props: { command: Command }) => {
       return <Wget command={props.command} />;
     case "welcome":
       return <Welcome command={props.command} />;
+    // 隠しコマンド
+    case "vim":
+      return <Vim command={props.command} />;
+    case "emacs":
+      return <Emacs command={props.command} />;
     case "":
       break;
     default:
