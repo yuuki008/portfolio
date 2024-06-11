@@ -46,8 +46,6 @@ const CommandOutput = (props: { command: Command }) => {
       return <Exit command={props.command} />;
     case "help":
       return <Help command={props.command} />;
-    case "rm":
-      return <Rm command={props.command} />;
     case "history":
       return <History command={props.command} />;
     case "date":
@@ -63,6 +61,8 @@ const CommandOutput = (props: { command: Command }) => {
     /**
      * 隠しコマンド
      */
+    case "rm":
+      return <Rm command={props.command} />;
     case "vim":
       return <Vim command={props.command} />;
     case "vi":

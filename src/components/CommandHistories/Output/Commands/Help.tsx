@@ -6,6 +6,11 @@ import { useContext, useEffect } from "react";
 
 const basicCommands = [
   {
+    command: "help",
+    description:
+      "Display a list of commands. Use 'help -a' to see all commands",
+  },
+  {
     command: "welcome",
     description: "Display a welcome message",
   },
@@ -22,11 +27,11 @@ const basicCommands = [
     description: "Concatenate and display the content of files",
   },
   {
-    command: "preview [markdown_file]",
+    command: "preview [md_file]",
     description: "Display a preview of a markdown file",
   },
   {
-    command: "imgcat [image_file]",
+    command: "imgcat [img_file]",
     description: "Display an image",
   },
   {
@@ -36,10 +41,6 @@ const basicCommands = [
   {
     command: "date",
     description: "Display the current date and time",
-  },
-  {
-    command: "help",
-    description: "Display a list of all commands entered",
   },
   {
     command: "clear",
@@ -54,12 +55,35 @@ const basicCommands = [
     description: "Download a file",
   },
   {
+    command: "history",
+    description: "Display a list of all commands entered",
+  },
+];
+
+const subCommands = [
+  {
     command: "rm",
     description: "Do not execute this command",
   },
   {
-    command: "history",
-    description: "Display a list of all commands entered",
+    command: "vim",
+    description: "Open the Vim text editor",
+  },
+  {
+    command: "vi",
+    description: "Open the Vi text editor",
+  },
+  {
+    command: "emacs",
+    description: "Open the Emacs text editor",
+  },
+  {
+    command: "git",
+    description: "Version control system to track change in code",
+  },
+  {
+    command: "sudo",
+    description: "Execute a command as the superuser",
   },
 ];
 
@@ -72,7 +96,7 @@ const Command = (props: CommandProps) => {
   return (
     <div className="flex">
       <span className="w-[200px] text-left block">{props.command}</span>
-      {`:${props.description}`}
+      {props.description}
     </div>
   );
 };
@@ -81,6 +105,7 @@ type HelpProps = {
   command: CommandType;
 };
 export const Help = (props: HelpProps) => {
+  const option = props.command.command.split(" ")[1];
   const { finishCommand } = useContext(TerminalContext);
 
   // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
@@ -93,11 +118,23 @@ export const Help = (props: HelpProps) => {
   return (
     <div>
       <p>Basic commands</p>
-      <div className="pl-2 mt-1">
+      <div className="pl-6">
         {basicCommands.map((command) => (
           <Command key={command.command} {...command} />
         ))}
       </div>
+      {option === "-a" || option === "--all" ? (
+        <>
+          <p className="mt-2">Sub commands</p>
+          <div className="pl-6">
+            {subCommands.map((command) => (
+              <Command key={command.command} {...command} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
