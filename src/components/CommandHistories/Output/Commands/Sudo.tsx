@@ -11,7 +11,7 @@ export const Sudo = (props: Props) => {
 
   // NOTE: 初回マウント時にのみ実行するため、eslintの警告を無効化
   /* eslint-disable react-hooks/exhaustive-deps */
-  const NeverGiveUpVideoUrl = "https://www.youtube.com/watch?v=KxGRhd_iWuE";
+  const NeverGiveUpVideoUrl = "https://www.youtube.com/watch?v=tYzMYcUty6s";
   useEffect(() => {
     setMessage(`sudo: Permission denied. You don't have the power yet.`);
     setTimeout(() => {
