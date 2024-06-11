@@ -60,7 +60,9 @@ const CommandOutput = (props: { command: Command }) => {
       return <Wget command={props.command} />;
     case "welcome":
       return <Welcome command={props.command} />;
-    // 隠しコマンド
+    /**
+     * 隠しコマンド
+     */
     case "vim":
       return <Vim command={props.command} />;
     case "vi":
