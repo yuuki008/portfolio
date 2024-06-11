@@ -7,8 +7,6 @@ type Props = {
 };
 
 export const Preview = (props: Props) => {
-  const fileName = props.command.command.split(" ")[1];
-  const extention = fileName.split(".").slice(-1)[0];
   const { currentDirectory, finishCommand } = useContext(TerminalContext);
 
   const [directory, _setDirectory] = useState(currentDirectory);
@@ -18,6 +16,15 @@ export const Preview = (props: Props) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const f = async () => {
+      const fileName = props.command.command.split(" ")[1];
+      if (!fileName) {
+        setMessage("preview: missing file operand");
+        finishCommand(props.command.id);
+        return;
+      }
+
+      const extention = fileName.split(".").slice(-1)[0];
+
       if (extention !== "md") {
         setMessage(`${fileName}: Not a markdown file`);
         finishCommand(props.command.id);
@@ -43,7 +50,7 @@ export const Preview = (props: Props) => {
     };
 
     f();
-  }, [directory, fileName]);
+  }, [directory]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   if (message) return message;
