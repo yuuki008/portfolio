@@ -19,6 +19,7 @@ import { Vim } from "./Commands/Vim";
 import { Emacs } from "./Commands/Emacs";
 import { Vi } from "./Commands/Vi";
 import { Git } from "./Commands/Git";
+import { Sudo } from "./Commands/Sudo";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -68,6 +69,8 @@ const CommandOutput = (props: { command: Command }) => {
       return <Emacs command={props.command} />;
     case "git":
       return <Git command={props.command} />;
+    case "sudo":
+      return <Sudo command={props.command} />;
     case "":
       break;
     default:
