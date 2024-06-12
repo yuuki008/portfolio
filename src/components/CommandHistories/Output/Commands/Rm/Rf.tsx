@@ -55,10 +55,8 @@ Sorry, this was just a joke. 😅`,
   };
 
   const getInfoSequences = () =>
-    infoSequencesData.map((sequence, index) => [
-      sequence.label,
-      typeof sequence.value === "function" ? sequence.value() : sequence.value,
-      sequence.delay,
+    infoSequencesData.map((sequence) => [
+      { ...sequence },
       () => handleNextSequence(),
     ]);
 
