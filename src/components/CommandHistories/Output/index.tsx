@@ -42,8 +42,6 @@ const CommandOutput = (props: { command: Command }) => {
       return <Preview command={props.command} />;
     case "imgcat":
       return <ImgCat command={props.command} />;
-    case "exit":
-      return <Exit command={props.command} />;
     case "help":
       return <Help command={props.command} />;
     case "history":
@@ -73,6 +71,8 @@ const CommandOutput = (props: { command: Command }) => {
       return <Git command={props.command} />;
     case "sudo":
       return <Sudo command={props.command} />;
+    case "exit":
+      return <Exit command={props.command} />;
     case "":
       break;
     default:
