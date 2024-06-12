@@ -17,7 +17,7 @@ export const Sudo = (props: Props) => {
     setTimeout(() => {
       window.open(NeverGiveUpVideoUrl, "_blank");
       finishCommand(props.command.id);
-    }, 1500);
+    }, 500);
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */
 
