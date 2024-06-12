@@ -36,6 +36,14 @@ The system administrator has been alerted. Further actions will be closely monit
     `**ATTENTION:**
 Suspicious command detected. This action has been logged and reported.
 The system administrator has been alerted. Further actions will be closely monitored.
+`,
+    300,
+    `**ATTENTION:**
+Suspicious command detected. This action has been logged and reported.
+The system administrator has been alerted. Further actions will be closely monitored.`,
+    `**ATTENTION:**
+Suspicious command detected. This action has been logged and reported.
+The system administrator has been alerted. Further actions will be closely monitored.
 
 
 Sorry, this was just a joke. 😅`,
@@ -56,8 +64,14 @@ Sorry, this was just a joke. 😅`,
 
   return (
     <div>
+      <AsciiImage
+        filePath="/images/terminator2.png"
+        width={300}
+        height={360}
+        brightness={1.3}
+      />
       <TypingAnimation
-        style={{ color: "rgb(239 68 6)" }}
+        style={{ color: "rgb(239 68 6)", marginTop: "16px" }}
         sequence={[...titleSequence, () => setIsTitleSequenceFinished(true)]}
         speed={40}
       />

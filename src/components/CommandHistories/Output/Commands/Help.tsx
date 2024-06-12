@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 
 const basicCommands = [
   {
-    command: "help",
+    command: "help [-a]",
     description:
       "Display a list of commands. Use 'help -a' to see all commands",
   },
@@ -62,7 +62,7 @@ const basicCommands = [
 
 const subCommands = [
   {
-    command: "rm",
+    command: "rm [-rf]",
     description: "Do not execute this command",
   },
   {
