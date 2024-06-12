@@ -20,6 +20,7 @@ import { Emacs } from "./Commands/Emacs";
 import { Vi } from "./Commands/Vi";
 import { Git } from "./Commands/Git";
 import { Sudo } from "./Commands/Sudo";
+import { Share } from "./Commands/Share";
 
 type Props = {
   commandHistory: CommandHistory;
@@ -56,6 +57,8 @@ const CommandOutput = (props: { command: Command }) => {
       return <Wget command={props.command} />;
     case "welcome":
       return <Welcome command={props.command} />;
+    case "share":
+      return <Share command={props.command} />;
     /**
      * 隠しコマンド
      */

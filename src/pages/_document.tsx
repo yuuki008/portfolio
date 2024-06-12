@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <title>{`Yuuki008 - Portfolio `}</title>
+      <title>{`Yuuki008 - Terminal Portfolio `}</title>
       <meta
         data-react-helmet="true"
         name="description"
@@ -15,7 +15,7 @@ export default function Document() {
       <meta
         data-react-helmet="true"
         property="og:title"
-        content="Yuuki008 - Portfolio"
+        content="Yuuki008 - Terminal Portfolio"
       ></meta>
       <meta
         data-react-helmet="true"
@@ -41,7 +41,7 @@ export default function Document() {
       <meta
         data-react-helmet="true"
         property="twitter:title"
-        content="Yuuki008 - Portfolio"
+        content="Yuuki008 - Terminal Portfolio"
       ></meta>
       <meta
         data-react-helmet="true"

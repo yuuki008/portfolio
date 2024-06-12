@@ -15,6 +15,10 @@ const basicCommands = [
     description: "Display a welcome message",
   },
   {
+    command: "share",
+    description: "Share this terminal on Twitter",
+  },
+  {
     command: "ls",
     description: "list directory contents",
   },
