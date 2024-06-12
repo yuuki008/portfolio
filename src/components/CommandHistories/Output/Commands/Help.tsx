@@ -47,10 +47,6 @@ const basicCommands = [
     description: "Clear the terminal screen",
   },
   {
-    command: "exit",
-    description: "Close the terminal",
-  },
-  {
     command: "wget [file] ",
     description: "Download a file",
   },
@@ -84,6 +80,10 @@ const subCommands = [
   {
     command: "sudo",
     description: "Execute a command as the superuser",
+  },
+  {
+    command: "exit",
+    description: "Close the terminal",
   },
 ];
 
