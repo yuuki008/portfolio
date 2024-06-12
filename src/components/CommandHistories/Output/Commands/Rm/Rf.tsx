@@ -39,17 +39,16 @@ export const Rf = (props: Props) => {
     500,
     `**ATTENTION:**
 Suspicious command detected. This action has been logged and reported.
-The system administrator has been alerted. Further actions will be closely monitored.`,
+The system administrator has been alerted.`,
     `**ATTENTION:**
 Suspicious command detected. This action has been logged and reported.
-The system administrator has been alerted. Further actions will be closely monitored.
-`,
+The system administrator has been alerted.`,
     () => setIsAttentionSequenceFinished(true),
   ];
 
   const lastMessageSequence = [
     1000,
-    `Sorry, this was just a joke. 😅`,
+    `Sorry, this was just a joke. 😊`,
     () => finishCommand(props.command.id),
   ];
 
