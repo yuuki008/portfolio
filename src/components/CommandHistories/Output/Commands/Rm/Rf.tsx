@@ -10,7 +10,7 @@ type Props = {
 const infoSequencesData = [
   {
     label: "Timestamp:",
-    value: "Timestamp: " + new Date().toLocaleDateString(),
+    value: "Timestamp: " + new Date().toLocaleString(),
     delay: 300,
   },
   {
