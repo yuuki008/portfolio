@@ -18,18 +18,15 @@ type Props = {
   };
 };
 
+const chars = "I'll be back.";
+
 export const AsciiImage = (props: Props) => {
-  const [quotes, setQuotes] = useState("");
   const [image, setImage] = useState<p5Types.Image | null>(null);
   let startIndex = 0;
 
   const preload = (p5: p5Types) => {
     p5.loadImage(props.filePath, (img: p5Types.Image) => {
       setImage(img);
-    });
-
-    p5.loadStrings("quotes.txt", (result) => {
-      setQuotes(result.join(" "));
     });
   };
 
@@ -42,7 +39,7 @@ export const AsciiImage = (props: Props) => {
   };
 
   const draw = (p5: p5Types) => {
-    if (!image || !quotes) return;
+    if (!image) return;
 
     p5.background(0);
     p5.frameRate(10);
@@ -67,7 +64,7 @@ export const AsciiImage = (props: Props) => {
         p5.textAlign(p5.CENTER, p5.CENTER);
 
         p5.text(
-          quotes.charAt(charIndex % quotes.length),
+          chars.charAt(charIndex % chars.length),
           i * w + w * 0.5,
           j * h + h * 0.5
         );
