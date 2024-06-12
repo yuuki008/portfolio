@@ -28,6 +28,7 @@ export const Cd = (props: Props) => {
     if (path == "/" || path == "~" || !path) {
       const dir = root(currentDirectory);
       updateCurrentDirectory(dir);
+      finishCommand(props.command.id);
       return;
     }
 
