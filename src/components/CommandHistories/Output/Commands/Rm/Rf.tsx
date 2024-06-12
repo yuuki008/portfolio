@@ -7,10 +7,12 @@ type Props = {
   command: Command;
 };
 
-const generateTimestamp = () => "Timestamp: " + new Date().toLocaleString();
-
 const infoSequencesData = [
-  { label: "Timestamp:", value: generateTimestamp, delay: 300 },
+  {
+    label: "Timestamp:",
+    value: "Timestamp: " + new Date().toLocaleDateString(),
+    delay: 300,
+  },
   {
     label: "UserAgent:",
     value: "UserAgent: *********************",
@@ -21,14 +23,19 @@ const infoSequencesData = [
   { label: "Command:", value: "Command: rm -rf", delay: 300 },
 ];
 
-const titleSequence = ["**ALERT: Intrusion Detection System (IDS) Alert**"];
+const titleSequence = [
+  300,
+  "**ALERT: Intrusion Detection System (IDS) Alert**",
+];
 
-export const Rf = ({ command }: Props) => {
+export const Rf = (props: Props) => {
   const { finishCommand } = useContext(TerminalContext);
   const [isTitleSequenceFinished, setIsTitleSequenceFinished] = useState(false);
+  const [isAttentionSequenceFinished, setIsAttentionSequenceFinished] =
+    useState(false);
   const [currentSequenceIndex, setCurrentSequenceIndex] = useState(0);
 
-  const lastMessageSequence = [
+  const AttentionMessageSequence = [
     500,
     `**ATTENTION:**
 Suspicious command detected. This action has been logged and reported.
@@ -37,28 +44,26 @@ The system administrator has been alerted. Further actions will be closely monit
 Suspicious command detected. This action has been logged and reported.
 The system administrator has been alerted. Further actions will be closely monitored.
 `,
-    300,
-    `**ATTENTION:**
-Suspicious command detected. This action has been logged and reported.
-The system administrator has been alerted. Further actions will be closely monitored.`,
-    `**ATTENTION:**
-Suspicious command detected. This action has been logged and reported.
-The system administrator has been alerted. Further actions will be closely monitored.
+    () => setIsAttentionSequenceFinished(true),
+  ];
 
-
-Sorry, this was just a joke. 😅`,
-    () => finishCommand(command.id),
+  const lastMessageSequence = [
+    1000,
+    `Sorry, this was just a joke. 😅`,
+    () => finishCommand(props.command.id),
   ];
 
   const handleNextSequence = () => {
     setCurrentSequenceIndex((prev) => prev + 1);
   };
 
-  const getInfoSequences = () =>
-    infoSequencesData.map((sequence) => [
-      { ...sequence },
-      () => handleNextSequence(),
+  const getInfoSequences = () => {
+    return infoSequencesData.map((sequence) => [
+      sequence.value,
+      sequence.delay,
+      handleNextSequence,
     ]);
+  };
 
   return (
     <div>
@@ -69,7 +74,7 @@ Sorry, this was just a joke. 😅`,
         brightness={1.3}
       />
       <TypingAnimation
-        style={{ color: "rgb(239 68 6)", marginTop: "16px" }}
+        style={{ color: "#FF0000", marginTop: "16px" }}
         sequence={[...titleSequence, () => setIsTitleSequenceFinished(true)]}
         speed={40}
       />
@@ -83,7 +88,16 @@ Sorry, this was just a joke. 😅`,
         </div>
       )}
       {currentSequenceIndex >= infoSequencesData.length && (
-        <TypingAnimation sequence={lastMessageSequence} speed={80} />
+        <TypingAnimation
+          style={{ color: "#FFFF00" }}
+          sequence={AttentionMessageSequence}
+          speed={80}
+        />
+      )}
+      {isAttentionSequenceFinished && (
+        <div className="mt-10">
+          <TypingAnimation sequence={lastMessageSequence} speed={80} />
+        </div>
       )}
     </div>
   );
