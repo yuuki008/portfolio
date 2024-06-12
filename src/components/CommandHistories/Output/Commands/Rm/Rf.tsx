@@ -71,7 +71,7 @@ The system administrator has been alerted. Further actions will be closely monit
         filePath="/images/terminator2.png"
         width={300}
         height={360}
-        brightness={1.3}
+        brightness={3.0}
       />
       <TypingAnimation
         style={{ color: "#FF0000", marginTop: "16px" }}

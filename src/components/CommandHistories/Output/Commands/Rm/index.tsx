@@ -50,7 +50,7 @@ export const Rm = (props: Props) => {
             filePath="/images/terminator.png"
             width={400}
             height={400}
-            brightness={1.3}
+            brightness={3.0}
           />
         </>
       )}
