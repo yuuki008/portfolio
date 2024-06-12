@@ -27,13 +27,13 @@ export const FirstView = () => {
         onClickScreen={onClickScreen}
       />
 
-      <div className="absolute mt-[20vh] left-1/2 -translate-x-1/2 z-10 flex flex-col justify-center">
+      <div className="absolute min-w-[280px] mt-[20vh] left-1/2 -translate-x-1/2 z-10 flex flex-col justify-center">
         <Image
           src="/images/logo.png"
           alt=""
           width={280}
           height={280}
-          className="w-[280px] h-[280px] mx-auto rounded-full shadow-2xl"
+          className="w-[280px] h-[280px] mx-auto"
         />
         <div>
           <div className="text-white text-center">

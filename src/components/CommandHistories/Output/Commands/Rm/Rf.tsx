@@ -76,7 +76,7 @@ The system administrator has been alerted. Further actions will be closely monit
       <TypingAnimation
         style={{ color: "#FF0000", marginTop: "16px" }}
         sequence={[...titleSequence, () => setIsTitleSequenceFinished(true)]}
-        speed={40}
+        speed={80}
       />
       {isTitleSequenceFinished && (
         <div className="p-4">

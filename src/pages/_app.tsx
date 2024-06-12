@@ -66,7 +66,7 @@ function App({ Component, pageProps, rootDirectory }: Props) {
       />
       <TerminalProvider rootDirectory={rootDirectory}>
         <main className={`font-terminal text-[14px] bg-black`}>
-          <div className="overflow-y-scroll terminal min-h-screen bg-black">
+          <div className="overflow-y-scroll overflow-x-hidden min-h-screen bg-black">
             <Component {...pageProps} />
           </div>
         </main>
